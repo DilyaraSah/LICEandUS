@@ -13,14 +13,18 @@ public class GetterController : MonoBehaviour
     [Header("The number of points added after the getter's work")]
     public int EarnedPoints = 100;
     public GameObject resourcesPanel;
+    public GameObject lice;
 
     public void SpawnGetter()
-    {
-        whereToSpawn = new Vector3(-129, 22, 50);
-        var lice = Instantiate(getter, whereToSpawn, Quaternion.Euler(0, -135, 0)) as GameObject;
-        Destroy(lice, DestroySec);
-        //resourcesPanel.GetComponent<ResourcesController>().blood += EarnedPoints;
-        Invoke("EarnPoints", DestroySec);
+    { if(lice == null)
+        {
+            whereToSpawn = new Vector3(-129, 22, 50);
+            lice = Instantiate(getter, whereToSpawn, Quaternion.Euler(0, -135, 0)) as GameObject;
+            resourcesPanel.GetComponent<ResourcesController>().blood -= PriceGetter;
+            Destroy(lice, DestroySec);
+            Invoke("EarnPoints", DestroySec);
+        }
+        
     }
     public void EarnPoints()
     {       
@@ -35,7 +39,6 @@ public class GetterController : MonoBehaviour
         {
             return;
         }
-        resourcesPanel.GetComponent<ResourcesController>().blood -= PriceGetter;
         SpawnGetter();
     }
 

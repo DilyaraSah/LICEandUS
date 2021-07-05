@@ -12,11 +12,16 @@ public class DefenderController1 : MonoBehaviour
     public int x = 0;
     public int y = 0;
     public int z = 0;
+    public GameObject lice;
 
     public void SpawnDefender()
-    {
-        whereToSpawn = new Vector3(x, y, z);
-        var lice = Instantiate(defender, whereToSpawn, Quaternion.Euler(0, 0, 0)) as GameObject;
+    { if (lice == null)
+        {
+            whereToSpawn = new Vector3(x, y, z);
+            lice = Instantiate(defender, whereToSpawn, Quaternion.Euler(0, 0, 0)) as GameObject;
+            resourcesPanel.GetComponent<ResourcesController>().blood -= PriceGetter;
+        }
+        
     }
 
     public void SpawnLice()
@@ -25,10 +30,7 @@ public class DefenderController1 : MonoBehaviour
         {
             return;
         }
-        resourcesPanel.GetComponent<ResourcesController>().blood -= PriceGetter;
         SpawnDefender();
-
-
     }
 
 }
