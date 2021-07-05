@@ -9,10 +9,13 @@ public class DefenderController1 : MonoBehaviour
     [Header("The price of the defender")]
     public int PriceGetter = 100;
     public GameObject resourcesPanel;
+    public int x = 0;
+    public int y = 0;
+    public int z = 0;
 
     public void SpawnDefender()
     {
-        whereToSpawn = new Vector3(50, 16, 143);
+        whereToSpawn = new Vector3(x, y, z);
         var lice = Instantiate(defender, whereToSpawn, Quaternion.Euler(0, 0, 0)) as GameObject;
     }
 
